@@ -22,32 +22,33 @@ public class GreetApplicationTests {
     @Autowired
     private GreetMapper greetMapper;
 
+//    public GreetApplicationTests(GreetMapper greetMapper) {
+//        this.greetMapper = greetMapper;
+//    }
+
     @Test
     public void contextLoads() {
     }
 
     @Test
     public void getAll() {
-        GreetMapper g = new GreetMapper;
-        List<Greet> greets = g.getAll();
+        List<Greet> greets = greetMapper.getAll();
         assertNotNull(greets);
         assertTrue(!greets.isEmpty());
     }
 
     @Test
     public void findUserById() {
-        GreetMapper g = new GreetMapper;
-        Greet greet = g.getGreet(1);
+        Greet greet = greetMapper.getGreet(1);
         assertNotNull(greet);
     }
 
     @Test
     public void createGreet() {
-        GreetMapper g = new GreetMapper;
         Greet n = new Greet();
         n.setGreet("n-nov");
-        g.createGreet(n);
-        Greet n2 = g.getGreet(n.getId());
+        greetMapper.createGreet(n);
+        Greet n2 = greetMapper.getGreet(n.getId());
         assertEquals("n-nov", n2.getGreet());
     }
 
