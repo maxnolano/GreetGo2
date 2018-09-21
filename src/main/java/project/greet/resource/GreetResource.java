@@ -5,7 +5,10 @@ import project.greet.mapper.GreetMapper;
 import project.greet.model.Greet;
 
 import javax.websocket.server.PathParam;
+import java.util.HashMap;
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("/rest/greet")
@@ -17,34 +20,34 @@ public class GreetResource {
         this.greetMapper = greetMapper;
     }
 
-
-//    @GetMapping("/getGreets")
-//    public List<Greet> getGreets() {
-//        return greetMapper.getGreets();
-//    }
-
-//    @GetMapping("/createGreet")
-//    public void createGreet() {
-//
-//        Greet greet = new Greet();
-//        greet.setGreet("Hello World!");
-//
-//        greetMapper.createGreet(greet);
-//    }
-
-    @GetMapping("/getGreet")
-    public Greet getGreet() {
-        return greetMapper.getGreet(1);
+    @GetMapping("/getGreet/{id}")
+    public Greet getGreet(@PathVariable int id) {
+        return greetMapper.getGreet(id);
     }
 
-    @GetMapping("/updateGreet")
-    public void updateGreet() {
-        greetMapper.updateGreet(1);
+    @RequestMapping(value = "/createGreet", method = {RequestMethod.GET, RequestMethod.POST})
+    public String createGreet() {
+        Greet n = new Greet();
+        n.setGreet("n-nov");
+        greetMapper.createGreet(n);
+        return "Created successfully";
     }
 
-//    @GetMapping("/deleteGreet")
-//    public String deleteGreet() {
-//        greetMapper.deleteGreet(1);
-//        return "Deleted!";
-//    }
+    @GetMapping("/deleteGreet/{id}")
+    public String deleteGreet(@PathVariable int id) {
+        greetMapper.deleteGreet(id);
+        return "Deleted successfully";
+    }
+
+    @GetMapping("/updateGreet/{id}")
+    public String updateGreet(@PathVariable int id) {
+        String name = "guanzhow";
+        greetMapper.updateGreet(name, id);
+        return "Upgraded successfully";
+    }
+
+    @RequestMapping(value="/getAll",method = RequestMethod.GET,produces = {"application/json"})
+    public @ResponseBody List<Greet> show(){
+        return greetMapper.getAll();
+    }
 }
