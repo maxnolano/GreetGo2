@@ -10,6 +10,7 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+@CrossOrigin(origins="http://localhost:8080", allowedHeaders="*")
 @RestController
 @RequestMapping("/rest/greet")
 public class GreetResource {
