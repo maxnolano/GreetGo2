@@ -26,13 +26,31 @@ public class GreetResource {
         return greetMapper.getGreet(id);
     }
 
-    @RequestMapping(value = "/createGreet", method = {RequestMethod.GET, RequestMethod.POST})
-    public String createGreet() {
-        Greet n = new Greet();
-        n.setGreet("n-nov");
-        greetMapper.createGreet(n);
-        return "Created successfully";
+//    @RequestMapping(value = "/createGreet", method = {RequestMethod.GET, RequestMethod.POST})
+//    public String createGreet() {
+//        Greet n = new Greet();
+//        n.setGreet("n-nov");
+//        greetMapper.createGreet(n);
+//        return "Created successfully";
+//    }
+
+    @RequestMapping(value="/createGreet", method=RequestMethod.POST)
+    public String createGreet(@RequestBody Greet greet){
+        greetMapper.createGreet(greet);
+        return "Sucessful!";
     }
+
+//    @GetMapping("/deleteGreet/{id}")
+//    public String deleteGreet(@PathVariable int id) {
+//        greetMapper.deleteGreet(id);
+//        return "Deleted successfully";
+//    }
+
+//    @RequestMapping(value="/deletetGreet", method=RequestMethod.GET)
+//    public String deleteGreet(@RequestBody int id){
+//        greetMapper.deleteGreet(id);
+//        return "Sucessfuly deleted!";
+//    }
 
     @GetMapping("/deleteGreet/{id}")
     public String deleteGreet(@PathVariable int id) {

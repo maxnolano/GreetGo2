@@ -18,3 +18,26 @@ app.controller('routeController',function ($scope, $http){
         alert("failure");
     });
 });
+
+app.controller('postController', function($scope, $http, $location) {
+    $scope.submitForm = function(){
+        var url = "http://localhost:8080/rest/greet/" + "createGreet";
+
+        var config = {
+            headers : {
+                'Accept': 'application/json'
+            }
+        }
+        var data = {
+            greet: $scope.greet
+        };
+
+        $http.post(url, data, config).then(function (response) {
+            $scope.postResultMessage = response.data;
+        }, function error(response) {
+            $scope.postResultMessage = "Error with status: " +  response.statusText;
+        });
+
+        $scope.greet = "";
+    }
+});

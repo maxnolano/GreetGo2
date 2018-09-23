@@ -13,6 +13,10 @@ app.config(function($routeProvider){
             templateUrl: '/views/route.html',
             controller: 'routeController'
         })
+        .when('/rest/greet/createGreet',{
+            templateUrl: '/views/form_view.html',
+            controller: 'postController'
+        })
         .otherwise(
             { redirectTo: '/rest/greet'}
         );
